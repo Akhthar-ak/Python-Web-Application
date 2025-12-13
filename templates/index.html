@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+<h2>Expense Tracker Dashboard</h2>
+<a href="/add">Add Expense</a> | <a href="/export">Export CSV</a>
+
+<h3>Expenses</h3>
+<table>
+<tr><th>Date</th><th>Title</th><th>Category</th><th>Amount</th><th>Action</th></tr>
+{% for e in expenses %}
+<tr>
+<td>{{ e.date }}</td>
+<td>{{ e.title }}</td>
+<td>{{ e.category }}</td>
+<td>{{ e.amount }}</td>
+<td><a href="/delete/{{ e.id }}">Delete</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Category-wise Totals</h3>
+<ul>
+{% for cat, amt in totals.items() %}
+<li>{{ cat }} : ₹{{ amt }}</li>
+{% endfor %}
+</ul>
+</div>
+</body>
+</html>
